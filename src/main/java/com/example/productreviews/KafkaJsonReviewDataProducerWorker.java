@@ -1,12 +1,15 @@
 package com.example.productreviews;
 
+import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
-public class KafkaJsonReviewDataProducerWorker {
+public class KafkaJsonReviewDataProducerWorker implements Callback {
     private static final String BROKERS = "localhost:49092, localhost:39092, localhost:29092";
 
     public static void main(String[] args) throws InterruptedException {
@@ -37,5 +40,11 @@ public class KafkaJsonReviewDataProducerWorker {
 
         System.out.println("Message sent successfully");
         producer.close();
+    }
+
+    @Override
+    public void onCompletion(RecordMetadata metadata, Exception exception) {
+        if (Objects.isNull(exception))
+            exception.printStackTrace();
     }
 }
