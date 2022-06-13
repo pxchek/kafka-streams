@@ -1,0 +1,3 @@
+➜  kafka_2.13-2.7.1 bin/kafka-topics.sh --create --bootstrap-server localhost:9094 --topic {name} --partitions 3 --replication-factor 3
+WARNING: Due to limitations in metric names, topics with a period ('.') or underscore ('_') could collide. To avoid issues it is best to use either, but not both.
+Created topic {name}.
