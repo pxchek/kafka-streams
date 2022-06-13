@@ -1,0 +1,6 @@
+➜  kafka_2.13-2.7.1 bin/kafka-topics.sh --list --bootstrap-server localhost:9094
+{name}
+➜  kafka_2.13-2.7.1 bin/kafka-topics.sh --list --bootstrap-server localhost:9093
+{name}
+➜  kafka_2.13-2.7.1 bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+{name}
