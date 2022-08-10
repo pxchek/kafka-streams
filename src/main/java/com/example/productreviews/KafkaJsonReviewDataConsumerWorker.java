@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Properties;
 
 public class KafkaJsonReviewDataConsumerWorker {
-    private static final String BROKERS = "localhost:49092, localhost:39092, localhost:29092";
+    private static final String BROKERS = "10.0.0.213:9092, 10.0.0.213:9093, 10.0.0.213:9094";
 
     public static void main(String[] args) {
         Properties props = new Properties();

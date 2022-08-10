@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 public class KafkaJsonReviewDataProducerWorker implements Callback {
-    private static final String BROKERS = "localhost:49092, localhost:39092, localhost:29092";
+    private static final String BROKERS = "10.0.0.213:9092, 10.0.0.213:9093, 10.0.0.213:9094";
 
     public static void main(String[] args) throws InterruptedException {
         Properties kafkaProps = new Properties();
@@ -23,15 +23,15 @@ public class KafkaJsonReviewDataProducerWorker implements Callback {
 
         ReviewData reviewData = new ReviewData();
         reviewData.setReviewerID("530-4953590-345");
-        reviewData.setAsin("784574747");
-        reviewData.setReviewerName("J. Smith");
+        reviewData.setAsin("676967676");
+        reviewData.setReviewerName("Kimi Smith");
         reviewData.setHelpful(List.of(2, 3));
         reviewData.setReviewText("Review Text");
         reviewData.setOverall(5.0);
         reviewData.setUnixReviewTime(1252800000);
         reviewData.setReviewTime("09 13, 2021");
 
-        for(int i = 0; i < 10000; i++) {
+        for(int i = 0; i <= 1; i++) {
             ProducerRecord<String, ReviewData> record = new ProducerRecord<>("quickstart-events", reviewData);
             producer.send(record);
 
