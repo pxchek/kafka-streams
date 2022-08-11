@@ -1,5 +1,7 @@
 package com.example.productreviews;
 
+import com.example.trace.Alert;
+import com.example.trace.TraceProducerMetricsInterceptor;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -16,10 +18,11 @@ public class KafkaJsonReviewDataProducerWorker implements Callback {
         Properties kafkaProps = new Properties();
 
         kafkaProps.put("bootstrap.servers", BROKERS);
-        kafkaProps.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        kafkaProps.put("key.serializer", "com.example.serializers.AlertSerializer");
         kafkaProps.put("value.serializer", "com.example.productreviews.KafkaJsonReviewDataSerializer");
+        kafkaProps.put("interceptor.classes", TraceProducerMetricsInterceptor.class.getName());
 
-        KafkaProducer producer = new KafkaProducer<String, ReviewData>(kafkaProps);
+        KafkaProducer<Alert, ReviewData> producer = new KafkaProducer<>(kafkaProps);
 
         ReviewData reviewData = new ReviewData();
         reviewData.setReviewerID("530-4953590-345");
@@ -32,7 +35,8 @@ public class KafkaJsonReviewDataProducerWorker implements Callback {
         reviewData.setReviewTime("09 13, 2021");
 
         for(int i = 0; i <= 1; i++) {
-            ProducerRecord<String, ReviewData> record = new ProducerRecord<>("quickstart-events", reviewData);
+            Alert alert = new Alert(1, "1", "INFO", "INFO MESSAGE");
+            ProducerRecord<Alert, ReviewData> record = new ProducerRecord<>("quickstart-events", alert, reviewData);
             producer.send(record);
 
             Thread.sleep(5_000);
