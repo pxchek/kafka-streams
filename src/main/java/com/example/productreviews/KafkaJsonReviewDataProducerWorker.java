@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 public class KafkaJsonReviewDataProducerWorker implements Callback {
-    private static final String BROKERS = "10.0.0.213:9092, 10.0.0.213:9093, 10.0.0.213:9094";
+    private static final String BROKERS = "10.0.0.38:9092, 10.0.0.213:9093, 10.0.0.128:9094";
 
     public static void main(String[] args) throws InterruptedException {
         Properties kafkaProps = new Properties();
